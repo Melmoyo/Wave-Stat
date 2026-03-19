@@ -37,7 +37,7 @@ const Compare = () => {
     
 
   return (
-  <>
+ 
   <div className=" min-h-screen p-8">
     <div>
        <h1 className="text-5xl mb-2">Compare</h1>
@@ -131,9 +131,9 @@ const Compare = () => {
           </div>
         )}
     </div>
-      </div>
+
         
-  </>
+
   )
 };
 
