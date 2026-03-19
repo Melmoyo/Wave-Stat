@@ -4,10 +4,10 @@ import {
 } from "lucide-react";
 
 
-const SearchBar = ({className="", searchValue,setSearchValue, height="h-10"}:className?: string;
+const SearchBar = ({className="", searchValue,setSearchValue, height="h-10"}:{className?: string;
   searchValue: string;
   setSearchValue: (value: string) => void;
-  height?: string;) => {
+  height?: string;}) => {
   
   return <>
   <div className={`${className} `}>
