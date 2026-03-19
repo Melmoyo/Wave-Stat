@@ -1,7 +1,7 @@
 import { useAllArtist } from "../hooks/useAllArtists";
 import StatCard from "../components/StatCard";
 import { formatNumber } from "../utils/formatter";
-import { PieChart, Pie, Label } from 'recharts';
+import { PieChart, Pie} from 'recharts';
 import {
   BarChart,
   Bar,
@@ -15,8 +15,8 @@ import {
 } from "recharts";
 import type { BarShapeProps } from "recharts";
 const Overview = () => {
-  const { artists, error, loading } = useAllArtist();
-  console.log(artists);
+  const { artists, loading } = useAllArtist();
+
 
   if (loading) {
     return <div>Loading</div>;
@@ -109,7 +109,7 @@ const genreDataWithPct = genreData.map(data => ({
               <BarChart responsive data={chartData} >
                 <CartesianGrid strokeDasharray=" 4 4" />
 <Tooltip cursor={{ fillOpacity: 0.5 }} 
-formatter={(value:number)=> formatNumber(value)} 
+formatter={(value) => Number(value).toLocaleString()}
 contentStyle={{backgroundColor:"#0a0a0f", borderRadius:"8px", color:"white"}} 
 labelStyle={{color:"white"}} 
 itemStyle={{color:"white"}} />

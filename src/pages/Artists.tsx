@@ -1,6 +1,6 @@
 import SearchBar from "../components/SearchBar";
 import {
-  Search,
+  
   Funnel,
   ArrowBigDown,
   ArrowBigUp,
@@ -10,8 +10,8 @@ import { useAllArtist } from "../hooks/useAllArtists";
 import { formatNumber } from "../utils/formatter";
 import {useState} from "react";
 const Artist = () => {
-  const { artists, error, loading } = useAllArtist();
-  const [searchValue, setSearchValue]=useState("");
+  const { artists } = useAllArtist();
+  const [searchValue, setSearchValue]=useState<string>("");
   const [sortFilter, setSortFilter]= useState(false);
   const [filter,setFilter]=useState(false);
 const [isSelected, setisSelected]= useState("Listeners");
@@ -62,7 +62,7 @@ const [isSelected, setisSelected]= useState("Listeners");
             </thead>
             <tbody>
               {artists.map((artist, index)=>(
-              <tr key={name} className="hover:bg-background/20 border-b border-white/20" >
+              <tr key={artist.name} className="hover:bg-background/20 border-b border-white/20" >
                 <td className="px-4 py-4 text-center text-gray-200">
                  #{index+1}
                   </td>

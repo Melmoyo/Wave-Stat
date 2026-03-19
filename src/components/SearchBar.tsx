@@ -1,7 +1,6 @@
 import {
-  Search,
-  Funnel,
-  ArrowBigDown
+  Search
+ 
 } from "lucide-react";
 
 

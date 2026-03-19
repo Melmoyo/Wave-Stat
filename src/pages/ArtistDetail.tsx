@@ -8,17 +8,15 @@ import {
   Bar,
   XAxis,
   YAxis,
-  CartesianGrid,
   Cell,
   Tooltip, 
-  Rectangle,
   ResponsiveContainer,
 } from "recharts";
 import {
  Music,
  Play,
  Clock4,
- TrendingUp, Search,
+ TrendingUp, 
  ChevronDown,
   Check
 } from "lucide-react";
@@ -27,7 +25,7 @@ import {useState} from "react";
 const ArtistDetail = () => {
     const colors = ["#ff4d8d", "#a78bfa", "#2dd4bf", "#fbbf24", "#64748b"];
   const { topTracks, error, loading , artists} = useTopTracks();
-    const [searchValue, setSearchValue]=useState("");
+    const [searchValue, setSearchValue]=useState<string>("");
     const [sortFilter, setSortFilter]= useState(false);
   const [filter,setFilter]=useState(false);
 const [isSelected, setisSelected]= useState("Most Streamed");
@@ -75,10 +73,10 @@ const [isSelected, setisSelected]= useState("Most Streamed");
         <div>
           <ResponsiveContainer width="100%" height={600}>
             <BarChart responsive data={topTracks}  layout="vertical" >
-               <XAxis   type="number" datakey="artist" tickFormatter={(value) => formatNumber(value)}/>
+               <XAxis   type="number" dataKey="artist" tickFormatter={(value) => formatNumber(value)}/>
               <YAxis type="category" dataKey="name" width={100}/>
               <Tooltip  cursor={{ fillOpacity: 0.5 }} 
-                     formatter={(value:number)=> formatNumber(value)} 
+                     formatter={(value) => Number(value).toLocaleString()}
                      contentStyle={{backgroundColor:"#0a0a0f", borderRadius:"8px", color:"white"}} 
                      labelStyle={{color:"white"}} 
                      itemStyle={{color:"white"}}

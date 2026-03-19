@@ -1,21 +1,17 @@
 import SearchBar from "../components/SearchBar";
-
-import { useTopTracks } from "../hooks/useTopTracks";
 import { formatNumber } from "../utils/formatter";
 import { useAllArtist } from "../hooks/useAllArtists";
 import {useState} from "react";
 import {
- Music,
-
- TrendingUp, Search,
- ChevronDown,Users
+ TrendingUp,
+Users
 
 } from "lucide-react";
 const SearchPage=()=>{
-     const colors = ["#ff4d8d", "#a78bfa", "#2dd4bf", "#fbbf24", "#64748b"];
+
     const [searchValue, setSearchValue]=useState("");
-    const {  error, loading , artists} = useAllArtist();
-    console.log(artists);
+    const {    artists} = useAllArtist();
+   
     return (
         <>
         <div className="  min-h-screen p-8">

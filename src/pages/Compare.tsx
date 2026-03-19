@@ -11,18 +11,18 @@ import {
   Bar,
   XAxis,
   YAxis,
-  CartesianGrid,
+
   Cell,
   Tooltip, 
-  Rectangle,
+
   ResponsiveContainer,
 } from "recharts";
 const Compare = () => {
-    const { artists, error, loading } = useAllArtist();
+    const { artists} = useAllArtist();
     const [addArtist, setAddArtist] = useState(false);
-    const [selectedArtist,setSelectedArtist]=useState([]);
+    const [selectedArtist,setSelectedArtist]=useState<string[]>([]);
     const colors = ["#ff4d8d", "#a78bfa", "#2dd4bf", "#fbbf24", "#64748b"];
-    const handleSelect=(sa)=>{
+    const handleSelect=(sa:string)=>{
       if(selectedArtist.length>=4) return;
       setSelectedArtist([...selectedArtist, sa]);
       setAddArtist(!addArtist);
@@ -30,7 +30,7 @@ const Compare = () => {
      
     }
  
-    const handleRemove=((sa)=>{
+    const handleRemove=((sa:string)=>{
       setSelectedArtist(selectedArtist.filter((i)=> i !== sa))
 
     })
@@ -45,7 +45,7 @@ const Compare = () => {
       </div>
       {/*Buttons*/}
       <div className="flex gap-x-8 ml-auto ">
-        {selectedArtist.map((sa, index)=>(
+        {selectedArtist.map((sa:string, index)=>(
     <button 
     style={{ borderColor: colors[index % colors.length],backgroundColor: `${colors[index % colors.length]}10`}} 
     key={sa} className="flex items-center rounded-3xl border  w-40 p-2 justify-between">
@@ -90,11 +90,11 @@ const Compare = () => {
                 Monthly Listeners
               </h2>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart responsive data={selectedArtist.map(sa=>artists.find(a=>a.name===sa))} layout="vertical" >
+            <BarChart responsive data={selectedArtist.map(sa:string=>artists.find(a=>a.name===sa))} layout="vertical" >
              
               <XAxis   type="number" tickFormatter={(value) => formatNumber(value)}/>
               <YAxis type="category" dataKey="name" width={100}/>
-              <Tooltip cursor={{ fillOpacity: 0.5 }} formatter={(value:number)=> formatNumber(value)} contentStyle={{backgroundColor:"#0a0a0f", borderRadius:"8px", color:"white"}} labelStyle={{color:"white"}} itemStyle={{color:"white"}}/>
+              <Tooltip cursor={{ fillOpacity: 0.5 }} formatter={(value) => Number(value).toLocaleString()} contentStyle={{backgroundColor:"#0a0a0f", borderRadius:"8px", color:"white"}} labelStyle={{color:"white"}} itemStyle={{color:"white"}}/>
               <Bar dataKey="listeners" width="20%"  >{selectedArtist.map((_, index) => (
     <Cell key={index} fill={colors[index % colors.length]} />
   ))}</Bar>
@@ -108,13 +108,13 @@ const Compare = () => {
               PlayCount
               </h2>
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart responsive data={selectedArtist.map(sa=>artists.find(a=>a.name===sa))} layout="vertical">
+                <BarChart responsive data={selectedArtist.map(sa:string=>artists.find(a=>a.name===sa))} layout="vertical">
         
                     <XAxis type="number" tickFormatter={(value) => formatNumber(value)}/>
                     <YAxis type="category" dataKey="name" width={100}/>
                      <Tooltip 
                      cursor={{ fillOpacity: 0.5 }} 
-                     formatter={(value:number)=> formatNumber(value)} 
+                     formatter={(value) => Number(value).toLocaleString()}
                      contentStyle={{backgroundColor:"#0a0a0f", borderRadius:"8px", color:"white"}} 
                      labelStyle={{color:"white"}} 
                      itemStyle={{color:"white"}}/>
