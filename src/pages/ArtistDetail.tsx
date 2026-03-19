@@ -24,16 +24,16 @@ import {useState} from "react";
 
 const ArtistDetail = () => {
     const colors = ["#ff4d8d", "#a78bfa", "#2dd4bf", "#fbbf24", "#64748b"];
-  const { topTracks, error, loading , artists} = useTopTracks();
+  const { topTracks, artists} = useTopTracks();
     const [searchValue, setSearchValue]=useState<string>("");
     const [sortFilter, setSortFilter]= useState(false);
-  const [filter,setFilter]=useState(false);
+ 
 const [isSelected, setisSelected]= useState("Most Streamed");
     const totalListeners = artists.reduce(
     (acc, artist) => acc + artist.listeners,
     0,
   );
-  console.log(topTracks);
+ 
   const totalPlayCount= artists.reduce((acc,artist)=> acc + artist.playcount,0,);
   const averageListeners = totalListeners / artists.length;
 
@@ -82,7 +82,7 @@ const [isSelected, setisSelected]= useState("Most Streamed");
                      itemStyle={{color:"white"}}
                      
                     />
-              <Bar dataKey="playcount" width="80%" nameKey="artist">{topTracks.map((track, index) => (
+              <Bar dataKey="playcount" width="80%" >{topTracks.map((track, index) => (
     <Cell key={track.name} fill={colors[index % colors.length]}/>))}</Bar>
               </BarChart>
             </ResponsiveContainer>
@@ -135,7 +135,7 @@ const [isSelected, setisSelected]= useState("Most Streamed");
             </thead>
             <tbody className="">
               {topTracks.map((track, index)=>(
-              <tr key={name} className="hover:bg-background/20 border-b border-white/20 ">
+              <tr key={track.name} className="hover:bg-background/20 border-b border-white/20 ">
                 <td className=" px-4 py-4 text-center">{index+1}</td>
               
              

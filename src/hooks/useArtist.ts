@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-
+import {Artist} from "../types/artist";
 import { fetchArtist } from "../api/lastfm";
-const artistNames = ["BTS", "BLACKPINK", "TWICE", "Stray Kids", "SEVENTEEN", "ITZY"]
+
 export const useArtist = (name: string) => {
-  const [artist, setArtist] = useState<Artist | null>([]);
+  const [artist, setArtist] = useState<Artist | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {

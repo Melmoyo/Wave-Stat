@@ -25,10 +25,10 @@ export const fetchArtist = async (name: string): Promise<Artist | null> => {
       (t: { name: string; url: string }) => t.name,
     ),
     tracks: tracksData.toptracks.track.map(
-      (tr: { name: string; playcount: number }) => ({
+      (tr: { name: string; playcount: number;artist: { name: string }  }) => ({
         name: tr.name,
         playcount: Number(tr.playcount),
-         artist: tr.artist.name
+        artist: tr.artist.name
       }),
     ),
    

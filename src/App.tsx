@@ -4,7 +4,7 @@ import Compare from "./pages/Compare";
 import Overview from "./pages/Overview";
 import ArtistDetail from "./pages/ArtistDetail";
 import SearchPage from "./pages/SearchPage";
-import SearchBar from "./components/SearchBar";
+
 import Sidebar from "./components/Sidebar";
 
 const App = () => {
