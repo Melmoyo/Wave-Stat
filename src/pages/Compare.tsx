@@ -90,7 +90,7 @@ const Compare = () => {
                 Monthly Listeners
               </h2>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart responsive data={selectedArtist.map(sa:string=>artists.find(a=>a.name===sa))} layout="vertical" >
+            <BarChart responsive data={selectedArtist.map((sa:string)=>artists.find(a=>a.name===sa)?? {})}  layout="vertical" >
              
               <XAxis   type="number" tickFormatter={(value) => formatNumber(value)}/>
               <YAxis type="category" dataKey="name" width={100}/>
@@ -108,7 +108,7 @@ const Compare = () => {
               PlayCount
               </h2>
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart responsive data={selectedArtist.map(sa:string=>artists.find(a=>a.name===sa))} layout="vertical">
+                <BarChart responsive data={selectedArtist.map((sa:string)=>artists.find(a=>a.name===sa)?? {})}  layout="vertical">
         
                     <XAxis type="number" tickFormatter={(value) => formatNumber(value)}/>
                     <YAxis type="category" dataKey="name" width={100}/>
@@ -127,9 +127,12 @@ const Compare = () => {
                   </BarChart>
                 </ResponsiveContainer>
               </div>
+            
           </div>
         )}
     </div>
+      </div>
+        
   </>
   )
 };
