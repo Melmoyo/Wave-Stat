@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {Artist} from "../types/artist";
+import type {Artist} from "../types/artist";
 import { fetchArtist } from "../api/lastfm";
 
 export const useArtist = (name: string) => {

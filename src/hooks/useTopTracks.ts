@@ -1,4 +1,4 @@
-import type { Artist } from "../types/artist";
+
 import { useAllArtist } from "../hooks/useAllArtists";
 
 
