@@ -7,11 +7,24 @@ import {
 Users
 
 } from "lucide-react";
+import React from "react"
+import {ClipLoader} from "react-spinners";
 const SearchPage=()=>{
 
     const [searchValue, setSearchValue]=useState("");
-    const {    artists} = useAllArtist();
+    const { loading,   artists} = useAllArtist();
+    console.log(artists);
+    const [filteredArtists,setFilteredArtists]=useState([]);
+    if(loading){
+   return <div className="w-full h-screen flex items-center justify-center"> <ClipLoader color="#fff" size={50}/></div>;
    
+}  
+   const SearchArtist=(searchValue:string)=>{
+ const results=artists.filter((artist)=>artist.name.toLowerCase().includes(searchValue.toLowerCase()))
+ console.log("results",results)
+  setFilteredArtists(results);
+ }
+ console.log(filteredArtists);
     return (
         <>
         <div className="  min-h-screen p-8">
@@ -26,7 +39,7 @@ const SearchPage=()=>{
                 <SearchBar className="w-full" height="h-14" searchValue={searchValue} setSearchValue={setSearchValue}/>
                 </div>
 
-                {/*Butons Trending*/}
+                {/*Buttons Trending*/}
                 <div>
                     <p className="flex gap-2 text-gray-100 items-center mb-4"><TrendingUp size={20}/>Trending Searches</p>
                     <div className=" flex">
@@ -55,45 +68,25 @@ const SearchPage=()=>{
                     <div>
                         <p className="text-gray-100 flex gap-2 items-center mb-4"><Users size={20}/>Top Artists</p>
                         <div className="grid grid-cols-3 gap-4 items-stretch ">
+                            {artists.map((artist)=>(
+                                  <React.Fragment key={artist?.name}>
                             <div className="group">
+                                
+                                   
                             <div className="rounded-lg flex gap-8 bg-card p-8 border border-card  group-hover:border-pink">
-                                <div className="w-6 h-6 rounded-full flex items-center justify-center bg-pink">{artists[0]?.name.slice(0,1)}</div>
-                                <div className="flex flex-col"><span className="group-hover:text-pink">{artists[0]?.name}</span><span className="text-gray-400">{formatNumber(artists[0]?.listeners)} listeners</span></div>
+                                
+                                   
+                                <div className="w-6 h-6 rounded-full flex items-center justify-center bg-pink">{artist?.name.slice(0,1)}</div>
+                                <div className="flex flex-col"><span className="group-hover:text-pink">{artist?.name}</span><span className="text-gray-400">{formatNumber(artist?.listeners)} listeners</span></div>
+                             
+                                </div>
+                              
                            </div>
-                           </div>
-                           <div className="group">
-                                <div className="rounded-lg flex gap-8 bg-card p-8 border border-card  group-hover:border-pink">
-                                <div className="w-6 h-6 rounded-full flex items-center justify-center bg-pink">{artists[1]?.name.slice(0,1)}</div>
-                                <div className="flex flex-col"><span className="group-hover:text-pink">{artists[1]?.name}</span><span className="text-gray-400">{formatNumber(artists[1]?.listeners)} listeners</span></div>
-                           </div>
-                           </div>
-                           <div className="group">
-                                <div className="rounded-lg flex gap-8 bg-card p-8 border border-card  group-hover:border-pink">
-                                <div className="w-6 h-6 rounded-full flex items-center justify-center bg-pink">{artists[2]?.name.slice(0,1)}</div>
-                                <div className="flex flex-col"><span className="group-hover:text-pink">{artists[2]?.name}</span><span className="text-gray-400">{formatNumber(artists[2]?.listeners)} listeners</span></div>
-                           </div>
-                           </div>
-                           <div className="group">
-                                <div className="rounded-lg flex gap-8 bg-card p-8 border border-card  group-hover:border-pink">
-                                <div className="w-6 h-6 rounded-full flex items-center justify-center bg-pink">{artists[3]?.name.slice(0,1)}</div>
-                                <div className="flex flex-col"><span className="group-hover:text-pink">{artists[3]?.name}</span><span className="text-gray-400">{formatNumber(artists[3]?.listeners)} listeners</span></div>
-                           </div>
-                           </div>
-                           <div className="group">
-                                <div className="rounded-lg flex gap-8 bg-card p-8 border border-card  group-hover:border-pink">
-                                <div className="w-6 h-6 rounded-full flex items-center justify-center bg-pink">{artists[4]?.name.slice(0,1)}</div>
-                                <div className="flex flex-col"><span className="group-hover:text-pink">{artists[4]?.name}</span><span className="text-gray-400">{formatNumber(artists[4]?.listeners)} listeners</span></div>
-                           </div>
-                           </div>
-                           <div className="group">
-                                <div className="rounded-lg flex gap-8 bg-card p-8 border border-card  group-hover:border-pink">
-                                <div className="w-6 h-6 rounded-full flex items-center justify-center bg-pink ">{artists[5]?.name.slice(0,1)}</div>
-                                <div className="flex flex-col"><span className="group-hover:text-pink">{artists[5]?.name}</span><span className="text-gray-400">{formatNumber(artists[5]?.listeners)} listeners</span></div>
-                           </div>
-                           </div>
+                            </React.Fragment > )) }  
+                           
                          
+
         </div>
-        
                     </div>
 
                     {/*Last Section */}

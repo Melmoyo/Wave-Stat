@@ -8,13 +8,41 @@ import {
 } from "lucide-react";
 import { useAllArtist } from "../hooks/useAllArtists";
 import { formatNumber } from "../utils/formatter";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import {ClipLoader} from "react-spinners";
 const Artist = () => {
-  const { artists } = useAllArtist();
+  const { artists,loading } = useAllArtist();
   const [searchValue, setSearchValue]=useState<string>("");
   const [sortFilter, setSortFilter]= useState(false);
   const [filter,setFilter]=useState(false);
 const [isSelected, setisSelected]= useState("Listeners");
+const [filteredList,setFilteredList]=useState<Artist[]>([]);
+
+useEffect(() => {
+   if (!artists || artists.length === 0) return
+
+  if(filter){
+    const descending=[...artists].sort((a,b)=>
+      b.listeners-a.listeners)
+    setFilteredList(descending);
+    }else{
+      const ascending=[...artists].sort((a,b)=>
+     a.listeners-b.listeners)
+       setFilteredList(ascending);
+    }
+  }
+
+,[filter,artists])
+console.log(filteredList)
+  
+   
+  
+
+
+if(loading){
+   return <div className="w-full h-screen flex items-center justify-center"> <ClipLoader color="#fff" size={50}/></div>;
+   
+}
   return (
     
   <div className="  min-h-screen p-8" >
@@ -30,14 +58,14 @@ const [isSelected, setisSelected]= useState("Listeners");
       <SearchBar className="w-96" searchValue={searchValue} setSearchValue={setSearchValue}/>
       {/*Filter*/}
       <div className="flex ml-auto gap-2">
-      <button className="flex rounded-lg  border border-white px-2 py-1 w-20 items-center hover:bg-teal" ><Funnel size={20} className="mr-1" />Label</button>
+      
       <button onClick={()=>setSortFilter(!sortFilter)} className="rounded-lg  border border-white px-2 py-1 w-25 items-center hover:bg-teal">Sort: {isSelected}</button>
      {sortFilter &&(
        <div className="absolute top-12 right-12 bg-card p-4 rounded-lg">
         <ul>
           <li onClick={()=>setisSelected("listeners")} className="hover:bg-teal flex items-center p-2 rounded-lg cursor-pointer"><Check size={18} className={`mr-2 ${isSelected==='Listeners'? 'visible':'invisible'} `}/>Monthly listeners</li>
       
-      <li  onClick={()=>setisSelected("Followers")} className="hover:bg-teal flex items-center p-2 rounded-lg cursor-pointer"> <Check size={18} className={`mr-2 ${isSelected==='Followers'? 'visible':'invisible'} `}/>Followers </li>
+      <li  onClick={()=>setisSelected("PlayCount")} className="hover:bg-teal flex items-center p-2 rounded-lg cursor-pointer"> <Check size={18} className={`mr-2 ${isSelected==='PlayCount'? 'visible':'invisible'} `}/>PlayCount </li>
       <li  onClick={()=>setisSelected("Engagement")} className="hover:bg-teal flex items-center p-2 rounded-lg cursor-pointer"> <Check size={18} className={`mr-2 ${isSelected==='Engagement'? 'visible':'invisible'} `}/>Engagement Rate</li>
       <li  onClick={()=>setisSelected("Name")} className="hover:bg-teal flex items-center p-2 rounded-lg cursor-pointer"> <Check size={18} className={`mr-2 ${isSelected==='Name'? 'visible':'invisible' }`}/>Name </li></ul></div>
      )
@@ -53,15 +81,15 @@ const [isSelected, setisSelected]= useState("Listeners");
             <tr className="text-gray-200 ">
               <th className=" px-4 py-4 ">Rank</th>
               <th className="px-4 py-4 text-left">Artist</th>
-              <th className="px-4 py-4 ">Label</th>
+              
               <th className="px-4 py-4">Monthly Listeners</th>
-              <th className="px-4 py-4">Followers</th>
+              <th className="px-4 py-4">PlayCount</th>
               <th className="px-4 py-4">Engagement</th>
               <th className="px-4 py-4">Growth</th>
               </tr>
             </thead>
             <tbody>
-              {artists.map((artist, index)=>(
+              {filteredList.map((artist, index)=>(
               <tr key={artist.name} className="hover:bg-background/20 border-b border-white/20" >
                 <td className="px-4 py-4 text-center text-gray-200">
                  #{index+1}
@@ -71,14 +99,12 @@ const [isSelected, setisSelected]= useState("Listeners");
                    <div className="bg-pink/40 text-pink rounded-full w-8 h-8 flex justify-center items-center"> {artist.name.slice(0,1)}</div><div>{artist.name}</div>
                   </td>
                   
-                  <td className="px-4 py-4 text-center text-gray-200  ">
-                    {artist.name}
-                  </td>
+              
                   <td className="px-4 py-4 text-center">
                     {formatNumber(artist.listeners)}
                   </td>
                   <td className="px-4 py-4 text-center">
-                    {artist.name}
+                    {formatNumber(artist.playcount)}
                   </td>
                   <td className="px-4 py-3 text-center text-pink">
                     {artist.name}

@@ -2,7 +2,6 @@ import StatCard from "../components/StatCard";
 import { useTopTracks } from "../hooks/useTopTracks";
 import { formatNumber } from "../utils/formatter";
 import SearchBar from "../components/SearchBar";
-
 import {
   BarChart,
   Bar,
@@ -20,22 +19,43 @@ import {
  ChevronDown,
   Check
 } from "lucide-react";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import {ClipLoader} from "react-spinners";
 
-const ArtistDetail = () => {
+const TopTracks = () => {
     const colors = ["#ff4d8d", "#a78bfa", "#2dd4bf", "#fbbf24", "#64748b"];
-  const { topTracks, artists} = useTopTracks();
+  const { topTracks, artists,loading} = useTopTracks();
     const [searchValue, setSearchValue]=useState<string>("");
     const [sortFilter, setSortFilter]= useState(false);
- 
-const [isSelected, setisSelected]= useState("Most Streamed");
+ const [isSelected, setisSelected]= useState("Most Streamed");
+const [filteredList, setFilteredList] = useState<Track[]>([])
     const totalListeners = artists.reduce(
     (acc, artist) => acc + artist.listeners,
     0,
   );
- 
+//  Sorting Logic
+useEffect(() => {
+  if (!topTracks || topTracks.length === 0) return
+  const trackSort= [...topTracks].sort((a,b)=>{
+if (isSelected==="Most Streamed"){
+return b.playcount-a.playcount
+}
+if(isSelected==="Track Name"){
+  return a.name.localeCompare(b.name)
+}
+return 0
+    
+    })
+    setFilteredList(trackSort)
+ }, [isSelected, topTracks])
+
+  
   const totalPlayCount= artists.reduce((acc,artist)=> acc + artist.playcount,0,);
   const averageListeners = totalListeners / artists.length;
+if(loading){
+   return <div className="w-full h-screen flex items-center justify-center"> <ClipLoader color="#fff" size={50}/></div>;
+   
+}
 
   return (<>
   <div className="  min-h-screen p-8">
@@ -89,7 +109,7 @@ const [isSelected, setisSelected]= useState("Most Streamed");
           </div>
    
 
-     <div className="flex justify-around items-center relative">
+     <div className="flex justify-around items-center relative mb-8 gap-x-4">
       
     <SearchBar className="w-full" searchValue={searchValue} setSearchValue={setSearchValue}/>
     {/*Filter*/}
@@ -107,9 +127,7 @@ const [isSelected, setisSelected]= useState("Most Streamed");
       <li  onClick={()=>setisSelected("Track Name")} 
       className="hover:bg-teal flex items-center p-2 rounded-lg cursor-pointer gap-2"> Track Name
       <Check size={18} className={`mr-2 text-gray-100/20 ${isSelected==='Track Name'? 'visible':'invisible'} `}/> </li>
-      <li  onClick={()=>setisSelected("Artist Name")} 
-      className="hover:bg-teal flex items-center p-2 rounded-lg cursor-pointer  gap-2"> Artist Name
-      <Check size={18} className={`mr-2 text-gray-100/20 ${isSelected==='Artist Name'? 'visible':'invisible'} `}/></li>
+     
      </ul>
       </div>
      )
@@ -134,7 +152,7 @@ const [isSelected, setisSelected]= useState("Most Streamed");
               </tr>
             </thead>
             <tbody className="">
-              {topTracks.map((track, index)=>(
+              {filteredList.map((track, index)=>(
               <tr key={track.name} className="hover:bg-background/20 border-b border-white/20 ">
                 <td className=" px-4 py-4 text-center">{index+1}</td>
               
@@ -164,4 +182,4 @@ const [isSelected, setisSelected]= useState("Most Streamed");
   )
 };
 
-export default ArtistDetail;
+export default TopTracks;

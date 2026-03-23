@@ -17,8 +17,9 @@ import {
 
   ResponsiveContainer,
 } from "recharts";
+import {ClipLoader} from "react-spinners";
 const Compare = () => {
-    const { artists} = useAllArtist();
+    const { artists,loading} = useAllArtist();
     const [addArtist, setAddArtist] = useState(false);
     const [selectedArtist,setSelectedArtist]=useState<string[]>([]);
     const colors = ["#ff4d8d", "#a78bfa", "#2dd4bf", "#fbbf24", "#64748b"];
@@ -29,7 +30,10 @@ const Compare = () => {
 
      
     }
- 
+ if(loading){
+   return <div className="w-full h-screen flex items-center justify-center"> <ClipLoader color="#fff" size={50}/></div>;
+   
+}
     const handleRemove=((sa:string)=>{
       setSelectedArtist(selectedArtist.filter((i)=> i !== sa))
 
