@@ -10,7 +10,7 @@ Users
 } from "lucide-react";
 import {colors} from "../constants/colors";
 import React from "react"
-import {LoadingSpinner} from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/LoadingSpinner";
 const SearchPage=()=>{
       
 const {topTracks}=useTopTracks();
