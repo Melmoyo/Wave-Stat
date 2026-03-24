@@ -207,7 +207,6 @@ const TopTracks = () => {
                 <th className=" px-4 py-4 text-left">Track</th>
                 <th className=" px-4 py-4 text-center">Artist</th>
                 <th className=" px-4 py-4 text-center">PlayCount</th>
-                <th className=" px-4 py-4 text-center">Share</th>
               </tr>
             </thead>
             <tbody className="">
@@ -231,10 +230,6 @@ const TopTracks = () => {
                   </td>
 
                   <td className=" px-4 py-4 text-center">{track.artist}</td>
-
-                  <td className=" px-4 py-4 text-center">
-                    {formatNumber(track.playcount)}
-                  </td>
 
                   <td className=" px-4 py-4 text-center">
                     {formatNumber(track.playcount)}

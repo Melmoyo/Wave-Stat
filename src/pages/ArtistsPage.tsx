@@ -132,8 +132,6 @@ const ArtistsPage = () => {
 
                 <th className="px-4 py-4">Monthly Listeners</th>
                 <th className="px-4 py-4">PlayCount</th>
-                <th className="px-4 py-4">Engagement</th>
-                <th className="px-4 py-4">Growth</th>
               </tr>
             </thead>
             <tbody>
@@ -159,12 +157,6 @@ const ArtistsPage = () => {
                   </td>
                   <td className="px-4 py-4 text-center">
                     {formatNumber(artist.playcount)}
-                  </td>
-                  <td className="px-4 py-3 text-center text-pink">
-                    {artist.name}
-                  </td>
-                  <td className="px-4 py-4 text-center text-green-400">
-                    {artist.name}
                   </td>
                 </tr>
               ))}
