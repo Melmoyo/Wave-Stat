@@ -17,12 +17,13 @@ import {
 
   ResponsiveContainer,
 } from "recharts";
+import {colors} from "../constants/colors";
 import {ClipLoader} from "react-spinners";
 const Compare = () => {
     const { artists,loading} = useAllArtist();
     const [addArtist, setAddArtist] = useState(false);
     const [selectedArtist,setSelectedArtist]=useState<string[]>([]);
-    const colors = ["#ff4d8d", "#a78bfa", "#2dd4bf", "#fbbf24", "#64748b"];
+
     const handleSelect=(sa:string)=>{
       if(selectedArtist.length>=4) return;
       setSelectedArtist([...selectedArtist, sa]);

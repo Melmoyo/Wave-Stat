@@ -2,6 +2,7 @@ import StatCard from "../components/StatCard";
 import { useTopTracks } from "../hooks/useTopTracks";
 import { formatNumber } from "../utils/formatter";
 import SearchBar from "../components/SearchBar";
+import {colors} from "../constants/colors";
 import {
   BarChart,
   Bar,
@@ -9,6 +10,7 @@ import {
   YAxis,
   Cell,
   Tooltip, 
+  Rectangle,
   ResponsiveContainer,
 } from "recharts";
 import {
@@ -23,16 +25,22 @@ import {useState, useEffect} from "react";
 import {ClipLoader} from "react-spinners";
 
 const TopTracks = () => {
-    const colors = ["#ff4d8d", "#a78bfa", "#2dd4bf", "#fbbf24", "#64748b"];
+ 
   const { topTracks, artists,loading} = useTopTracks();
     const [searchValue, setSearchValue]=useState<string>("");
     const [sortFilter, setSortFilter]= useState(false);
  const [isSelected, setisSelected]= useState("Most Streamed");
 const [filteredList, setFilteredList] = useState<Track[]>([])
+const [filteredArtist, setFilteredArtist] = useState<Artist[]>([])
     const totalListeners = artists.reduce(
     (acc, artist) => acc + artist.listeners,
     0,
   );
+    const CustomRectangle = (props: BarShapeProps) => {
+      
+    return <Rectangle {...props} fill={colors[props.index % colors.length]} />;
+  };
+  
 //  Sorting Logic
 useEffect(() => {
   if (!topTracks || topTracks.length === 0) return
@@ -49,7 +57,16 @@ return 0
     setFilteredList(trackSort)
  }, [isSelected, topTracks])
 
-  
+//  Search Logic
+   useEffect(()=>{
+if(searchValue===""){
+  setFilteredArtist(artists)
+   return
+}
+const search=artists.filter((artist)=> artist.name.toUpperCase().includes(searchValue.toUpperCase()));
+setFilteredArtist(search);
+  }, [searchValue,artists])
+
   const totalPlayCount= artists.reduce((acc,artist)=> acc + artist.playcount,0,);
   const averageListeners = totalListeners / artists.length;
 if(loading){
@@ -92,8 +109,8 @@ if(loading){
 
         <div>
           <ResponsiveContainer width="100%" height={600}>
-            <BarChart responsive data={topTracks}  layout="vertical" >
-               <XAxis   type="number" dataKey="artist" tickFormatter={(value) => formatNumber(value)}/>
+            <BarChart  data={filteredList}  layout="vertical" >
+               <XAxis   type="number"  tickFormatter={(value) => formatNumber(value)}/>
               <YAxis type="category" dataKey="name" width={100}/>
               <Tooltip  cursor={{ fillOpacity: 0.5 }} 
                      formatter={(value) => Number(value).toLocaleString()}
@@ -102,8 +119,7 @@ if(loading){
                      itemStyle={{color:"white"}}
                      
                     />
-              <Bar dataKey="playcount" width="80%" >{topTracks.map((track, index) => (
-    <Cell key={track.name} fill={colors[index % colors.length]}/>))}</Bar>
+              <Bar dataKey="playcount"   shape={CustomRectangle} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -116,7 +132,7 @@ if(loading){
       <div className="flex ml-auto gap-2">
      
       <button onClick={()=>setSortFilter(!sortFilter)} 
-      className="rounded-lg border  border-gray-100/10 text-white border-1/2 px-2 py-1 w-40 items-center hover:bg-teal flex items-center justify-between bg-card">{isSelected}<ChevronDown size={20}/></button>
+      className="rounded-lg border  border-gray-100/10 text-white border-1/2 px-2 py-1 w-40 items-center hover:bg-teal flex items-center justify-between bg-sidebar">{isSelected}<ChevronDown size={20}/></button>
      {sortFilter &&(
        <div className="absolute top-12 right-0 bg-card p-2 rounded-lg">
         <ul>
@@ -141,7 +157,7 @@ if(loading){
 
 {/*Table*/}
        <div className=" overflow-x-auto  ">
-        <table className=" w-full bg-card rounded-lg text-xl font-body ">
+        <table className=" w-full bg-sidebar rounded-lg text-xl font-body ">
           <thead className="border-b border-white/20">
             <tr className="border-b text-gray-200 ">
               <th  className=" px-4 py-4 text-center">#</th>
@@ -159,7 +175,7 @@ if(loading){
              
                 <td className=" px-4 py-4 text-left"> 
                   <div className="flex gap-2 items-center justify-left">
-                    <span className="block shrink-0  w-1 h-8 bg-teal rounded-lg "></span><span>{track.name}</span></div></td>
+                    <span className="block shrink-0  w-1 h-8 bg-teal rounded-lg " style={{backgroundColor:colors[index %colors.length]}}></span><span>{track.name}</span></div></td>
                 
               
                 <td className=" px-4 py-4 text-center">{track.artist}</td>

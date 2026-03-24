@@ -17,7 +17,7 @@ const StatCard = ({
   valueColor,
 }: StatCardProps) => {
   return (
-    <div className={`${border} rounded-lg bg-card p-4  h-full w-full`}>
+    <div className={`${border} rounded-lg bg-sidebar p-4  h-full w-full`}>
       <div className="space-y-2 font-mono text-gray-100 ">
         <div className="uppercase  text-lg">{label}</div>
           {icon && <span>{icon}</span>}

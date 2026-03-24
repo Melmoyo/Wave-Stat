@@ -14,6 +14,7 @@ import {
   Rectangle,
   ResponsiveContainer,
 } from "recharts";
+import {colors} from "../constants/colors";
 import type { BarShapeProps } from "recharts";
 import {ClipLoader} from "react-spinners";
 const Overview = () => {
@@ -36,7 +37,7 @@ const Overview = () => {
     artists[0],
   );
   
-  const colors = ["#ff4d8d", "#a78bfa", "#2dd4bf", "#fbbf24", "#64748b"];
+
   const chartData = artists.map((artist) => ({
     name: artist.name,
     listeners: artist.listeners,

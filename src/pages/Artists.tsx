@@ -1,6 +1,5 @@
 import SearchBar from "../components/SearchBar";
 import {
-  
   Funnel,
   ArrowBigDown,
   ArrowBigUp,
@@ -33,10 +32,25 @@ useEffect(() => {
   }
 
 ,[filter,artists])
-console.log(filteredList)
-  
-   
-  
+
+  useEffect(()=>{
+if(searchValue===""){
+  setFilteredList(artists)
+   return
+}
+const search=artists.filter((artist)=> artist.name.toUpperCase().includes(searchValue.toUpperCase()));
+setFilteredList(search);
+  }, [searchValue,artists])
+
+  useEffect(()=>{
+     if (!artists || artists.length === 0) return
+     if(isSelected==="Name"){
+      const sortName= [...artists].sort((a,b)=>a.name.localeCompare(b.name))
+      setFilteredList(sortName)
+     }
+
+
+  },[artists,isSelected])
 
 
 if(loading){
@@ -61,12 +75,12 @@ if(loading){
       
       <button onClick={()=>setSortFilter(!sortFilter)} className="rounded-lg  border border-white px-2 py-1 w-25 items-center hover:bg-teal">Sort: {isSelected}</button>
      {sortFilter &&(
-       <div className="absolute top-12 right-12 bg-card p-4 rounded-lg">
+       <div className="absolute top-12 right-12 bg-sidebar p-4 rounded-lg">
         <ul>
           <li onClick={()=>setisSelected("listeners")} className="hover:bg-teal flex items-center p-2 rounded-lg cursor-pointer"><Check size={18} className={`mr-2 ${isSelected==='Listeners'? 'visible':'invisible'} `}/>Monthly listeners</li>
       
       <li  onClick={()=>setisSelected("PlayCount")} className="hover:bg-teal flex items-center p-2 rounded-lg cursor-pointer"> <Check size={18} className={`mr-2 ${isSelected==='PlayCount'? 'visible':'invisible'} `}/>PlayCount </li>
-      <li  onClick={()=>setisSelected("Engagement")} className="hover:bg-teal flex items-center p-2 rounded-lg cursor-pointer"> <Check size={18} className={`mr-2 ${isSelected==='Engagement'? 'visible':'invisible'} `}/>Engagement Rate</li>
+     
       <li  onClick={()=>setisSelected("Name")} className="hover:bg-teal flex items-center p-2 rounded-lg cursor-pointer"> <Check size={18} className={`mr-2 ${isSelected==='Name'? 'visible':'invisible' }`}/>Name </li></ul></div>
      )
 }
@@ -76,7 +90,7 @@ if(loading){
 
       {/*Table*/}
       <div className="overflow-x-auto">
-        <table className="w-full bg-card rounded-lg text-xl font-body ">
+        <table className="w-full bg-sidebar rounded-lg text-xl font-body ">
           <thead className="border-b border-white/20">
             <tr className="text-gray-200 ">
               <th className=" px-4 py-4 ">Rank</th>
