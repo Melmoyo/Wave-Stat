@@ -18,7 +18,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import {colors} from "../constants/colors";
-import {ClipLoader} from "react-spinners";
+import {LoadingSpinner} from "../components/LoadingSpinner";
 const Compare = () => {
     const { artists,loading} = useAllArtist();
     const [addArtist, setAddArtist] = useState(false);
@@ -32,7 +32,7 @@ const Compare = () => {
      
     }
  if(loading){
-   return <div className="w-full h-screen flex items-center justify-center"> <ClipLoader color="#fff" size={50}/></div>;
+   return <LoadingSpinner/>
    
 }
     const handleRemove=((sa:string)=>{

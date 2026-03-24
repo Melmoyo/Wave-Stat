@@ -10,7 +10,7 @@ Users
 } from "lucide-react";
 import {colors} from "../constants/colors";
 import React from "react"
-import {ClipLoader} from "react-spinners";
+import {LoadingSpinner} from "../components/LoadingSpinner";
 const SearchPage=()=>{
       
 const {topTracks}=useTopTracks();
@@ -21,7 +21,7 @@ const {topTracks}=useTopTracks();
 
    
     if(loading){
-   return <div className="w-full h-screen flex items-center justify-center"> <ClipLoader color="#fff" size={50}/></div>;
+   return <LoadingSpinner/>
    
 }  
  

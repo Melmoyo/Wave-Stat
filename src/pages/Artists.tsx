@@ -8,7 +8,7 @@ import {
 import { useAllArtist } from "../hooks/useAllArtists";
 import { formatNumber } from "../utils/formatter";
 import {useState, useEffect} from "react";
-import {ClipLoader} from "react-spinners";
+import {LoadingSpinner} from "../components/LoadingSpinner";
 const Artist = () => {
   const { artists,loading } = useAllArtist();
   const [searchValue, setSearchValue]=useState<string>("");
@@ -54,7 +54,7 @@ setFilteredList(search);
 
 
 if(loading){
-   return <div className="w-full h-screen flex items-center justify-center"> <ClipLoader color="#fff" size={50}/></div>;
+   return <LoadingSpinner/>
    
 }
   return (

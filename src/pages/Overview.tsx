@@ -16,13 +16,13 @@ import {
 } from "recharts";
 import {colors} from "../constants/colors";
 import type { BarShapeProps } from "recharts";
-import {ClipLoader} from "react-spinners";
+import {LoadingSpinner} from "../components/LoadingSpinner";
 const Overview = () => {
   const { artists, loading } = useAllArtist();
 
 
   if (loading) {
-    return <div className="w-full h-screen flex items-center justify-center"> <ClipLoader color="#fff" size={50}/></div>;
+    return <LoadingSpinner/>
   }
   const totalListeners = artists.reduce(
     (acc, artist) => acc + artist.listeners,
