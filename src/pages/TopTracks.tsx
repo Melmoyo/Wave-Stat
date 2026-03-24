@@ -11,8 +11,8 @@ import {
   Tooltip,
   Rectangle,
   ResponsiveContainer,
-  type BarShapeProps,
 } from "recharts";
+
 import type { Track, Artist } from "../types/artist";
 import {
   Music,

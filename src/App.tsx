@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ArtistsPage from "./pages/Artists";
+import ArtistsPage from "./pages/ArtistsPage";
 import Compare from "./pages/Compare";
 import Overview from "./pages/Overview";
 import TopTracks from "./pages/TopTracks";
