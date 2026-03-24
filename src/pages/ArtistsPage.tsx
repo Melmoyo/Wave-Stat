@@ -5,7 +5,7 @@ import { formatNumber } from "../utils/formatter";
 import { useState, useEffect } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import type { Artist } from "../types/artist";
-const Artist = () => {
+const ArtistsPage = () => {
   const { artists, loading } = useAllArtist();
   const [searchValue, setSearchValue] = useState<string>("");
   const [sortFilter, setSortFilter] = useState(false);
@@ -179,4 +179,4 @@ const Artist = () => {
   );
 };
 
-export default Artist;
+export default ArtistsPage;

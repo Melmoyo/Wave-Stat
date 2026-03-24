@@ -11,6 +11,7 @@ import {
   Tooltip,
   Rectangle,
   ResponsiveContainer,
+  type BarShapeProps,
 } from "recharts";
 import type { Track, Artist } from "../types/artist";
 import {
@@ -21,6 +22,7 @@ import {
   ChevronDown,
   Check,
 } from "lucide-react";
+
 import { useState, useEffect } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
 
