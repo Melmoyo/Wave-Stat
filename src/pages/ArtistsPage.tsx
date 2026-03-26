@@ -61,7 +61,7 @@ const ArtistsPage = () => {
 
         <div className="flex justify-between items-center relative">
           <SearchBar
-            className="w-96"
+            className="md:w-96"
             searchValue={searchValue}
             setSearchValue={setSearchValue}
           />
@@ -123,7 +123,7 @@ const ArtistsPage = () => {
         </div>
 
         {/*Table*/}
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto w-full">
           <table className="w-full bg-sidebar rounded-lg text-xl font-body ">
             <thead className="border-b border-white/20">
               <tr className="text-gray-200 ">

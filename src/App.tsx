@@ -11,7 +11,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Sidebar />
-      <main className="ml-60 min-h-screen">
+      <main className="pt-16 md:ml-60 md:pt-0 min-h-screen">
         <Routes>
           <Route path="/" element={<Overview />}></Route>
           <Route path="/compare" element={<Compare />}></Route>

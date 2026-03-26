@@ -88,7 +88,7 @@ const TopTracks = () => {
                 Browse and analyze the most sreamed K-pop tracks
               </p>
             </div>
-            <div className="grid grid-cols-4 gap-4 items-stretch">
+            <div className="grid md:grid-cols-4 gap-4 items-stretch">
               <StatCard
                 label="Total Tracks"
                 value={`${artists.length} `}

@@ -69,9 +69,9 @@ const Overview = () => {
 
   return (
     <>
-      <div className="  min-h-screen p-8">
+      <div className="  min-h-screen px-8 ">
         <h1 className="text-5xl mb-8">Overview</h1>
-        <div className="grid grid-cols-4 gap-4 items-stretch">
+        <div className="grid grid-cols-1  md:grid-cols-4 gap-4 items-stretch">
           <StatCard
             label="Artists Tracked"
             value={`${artists.length} `}
@@ -102,7 +102,7 @@ const Overview = () => {
           />
         </div>
 
-        <div className="grid grid-cols-3 gap-x-4 mt-4  mb-4  ">
+        <div className="grid gap-y-4 md:grid-cols-3 gap-x-4 mt-4  mb-4  ">
           <div className="col-span-2 bg-sidebar rounded-lg">
             <h2 className="text-white uppercase mb-4 text-xl font-body p-4">
               Monthly Listeners (Millions)
@@ -134,9 +134,9 @@ const Overview = () => {
             </div>
           </div>
 
-          <div className="bg-sidebar p-8 rounded-lg max-w-sm col-span-1">
+          <div className="bg-sidebar p-8 rounded-lg   col-span-1">
             <h2 className="text-2xl">Top 5 Artists</h2>
-            <div className="w-full grid grid-cols-1">
+            <div className="w-full  grid grid-cols-1">
               <ul>
                 {top5Artists.map((artist, index) => (
                   <li key={artist.name} className="">
@@ -161,7 +161,7 @@ const Overview = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-x-4">
+        <div className="grid gap-y-4 md:grid-cols-3 gap-x-4">
           {/*Top 2 Artists*/}
           {top5Artists.slice(0, 2).map((artist) => (
             <React.Fragment key={artist.name}>
