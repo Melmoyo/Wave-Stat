@@ -21,7 +21,7 @@ A React-based music dashboard that connects to the Last.fm API to surface K-pop 
 
 ## Live Demo
 
-🔗 [View Live]()
+🔗 [View Live]( https://wavestat.netlify.app/)
 
 ## Getting Started
 
