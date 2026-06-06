@@ -69,9 +69,9 @@ const Overview = () => {
 
   return (
     <>
-      <div className="  min-h-screen px-8 ">
+      <div className="  min-h-screen px-8 mb-20">
         <h1 className="text-5xl mb-8">Overview</h1>
-        <div className="grid grid-cols-1  md:grid-cols-4 gap-4 items-stretch">
+        <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
           <StatCard
             label="Artists Tracked"
             value={`${artists.length} `}
@@ -102,7 +102,7 @@ const Overview = () => {
           />
         </div>
 
-        <div className="grid gap-y-4 md:grid-cols-3 gap-x-4 mt-4  mb-4  ">
+        <div className="grid gap-y-4 grid-cols-1 lg:grid-cols-3 gap-x-4 mt-4  mb-4  ">
           <div className="col-span-2 bg-sidebar rounded-lg">
             <h2 className="text-white uppercase mb-4 text-xl font-body p-4">
               Monthly Listeners (Millions)
@@ -161,20 +161,20 @@ const Overview = () => {
           </div>
         </div>
 
-        <div className="grid gap-y-4 md:grid-cols-3 gap-x-4">
+        <div className="grid gap-y-4 grid-cols-1 md:grid-cols-2 gap-x-4">
           {/*Top 2 Artists*/}
           {top5Artists.slice(0, 2).map((artist) => (
             <React.Fragment key={artist.name}>
-              <div className="bg-sidebar flex gap-x-10 p-8 rounded-lg font-mono hover:bg-gray-700/10">
-                <div className="uppercase text-3xl bg-pink/20 text-pink p-4 w-20 flex justify-center items-center h-20 rounded-lg">
+              <div className="bg-sidebar grid-cols-2  gap-x-4 md:gap-x-10  p-4 md:p-8 rounded-lg font-mono hover:bg-gray-700/10">
+                <div className="uppercase text-3xl bg-pink/20 text-pink p-4 w-20 flex-shrink-0 flex justify-center items-center h-20 rounded-lg">
                   {artist?.name.slice(0, 1)}
                 </div>
-                <div>
-                  <div className="text-2xl ">{artist?.name}</div>
+                <div className="mt-4">
+                  <div className="text-2xl">{artist?.name}</div>
                   <div className="text-xl">
                     {formatNumber(artist?.listeners)}
                   </div>
-                  <div className="flex text-lg">
+                  <div className="flex text-lg  ">
                     <div className="">
                       {artist?.tags.slice(0, 2).map((tag, i) => (
                         <span
@@ -192,7 +192,7 @@ const Overview = () => {
           ))}
 
           {/*Third card Pie Chart*/}
-          <div className="bg-sidebar flex gap-x-10  rounded-lg  items-center font-mono ">
+          <div className=" h-auto bg-sidebar col-span-2 flex gap-x-10 md:flex-col rounded-lg  items-center font-mono ">
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Tooltip

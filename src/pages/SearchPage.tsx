@@ -22,7 +22,7 @@ const SearchPage = () => {
 
   return (
     <>
-      <div className="  min-h-screen p-8">
+      <div className="  min-h-screen p-8 mb-12">
         <div className="grid grid-cols-1 space-y-10">
           {/*Title*/}
           <div>
@@ -90,10 +90,10 @@ const SearchPage = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 items-stretch ">
               {artists.map((artist, index) => (
                 <React.Fragment key={artist?.name}>
-                  <div className="group">
-                    <div className="rounded-lg flex gap-8 bg-sidebar p-8 border border-card  group-hover:border-pink">
+                  <div className="group ">
+                    <div className="rounded-lg flex flex-col gap-8 bg-sidebar p-8 border border-card  group-hover:border-pink">
                       <div
-                        className="w-6 h-6 rounded-full flex items-center justify-center bg-pink"
+                        className="min-w-6 max-w-8 min-h-6 max-h-8 rounded-full flex items-center justify-center bg-pink"
                         style={{
                           backgroundColor: colors[index % colors.length],
                         }}

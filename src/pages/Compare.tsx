@@ -31,7 +31,7 @@ const Compare = () => {
   };
 
   return (
-    <div className=" min-h-screen p-8">
+    <div className=" min-h-screen p-8 mb-4">
       <div>
         <h1 className="text-5xl mb-2">Compare</h1>
         <p className="text-xl mb-8 text-gray-200">
@@ -39,7 +39,7 @@ const Compare = () => {
         </p>
       </div>
       {/*Buttons*/}
-      <div className="flex gap-x-8 ml-auto ">
+      <div className="flex flex-wrap gap-4">
         {selectedArtist.map((sa: string, index) => (
           <button
             style={{
@@ -76,7 +76,7 @@ const Compare = () => {
           )}
           {/*Dropdown */}
           {addArtist && (
-            <div className="overflow-y-auto absolute top-12 right-0 fixed -mx-2  bg-card  rounded-lg z-50">
+            <div className="overflow-y-auto overflow-x-auto absolute top-12 right-0 fixed -mx-2  bg-card  rounded-lg z-50">
               <ul>
                 {artists
                   .filter((artist) => !selectedArtist.includes(artist.name))
@@ -106,7 +106,7 @@ const Compare = () => {
       </div>
       {/*Monthly Listeners*/}
       {selectedArtist.length > 0 && (
-        <div className="  mt-4 p-8 grid grid-cols-2 gap-20">
+        <div className=" mt-4 p-4 md:p-8 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-20">
           <div className=" p-4 rounded-lg bg-card">
             <h2 className="text-white/70 uppercase mb-4 text-md font-mono font-semibold">
               Monthly Listeners

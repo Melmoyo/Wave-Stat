@@ -50,7 +50,7 @@ const ArtistsPage = () => {
     return <LoadingSpinner />;
   }
   return (
-    <div className="  min-h-screen p-8">
+    <div className="  min-h-screen p-8 mb-4 ">
       <div className="grid grid-cols-1 gap-8">
         <div>
           <h1 className="text-5xl mb-2">Artists</h1>
@@ -59,14 +59,14 @@ const ArtistsPage = () => {
           </p>
         </div>
 
-        <div className="flex justify-between items-center relative">
+        <div className="flex flex-col items-start lg:flex-row lg:justify-between lg:items-center relative">
           <SearchBar
             className="md:w-96"
             searchValue={searchValue}
             setSearchValue={setSearchValue}
           />
           {/*Filter*/}
-          <div className="flex ml-auto gap-2">
+          <div className="flex flex-row items-center mt-4 lg:mt-0 gap-2">
             <button
               onClick={() => setSortFilter(!sortFilter)}
               className="rounded-lg  border border-white px-2 py-1 w-25 items-center hover:bg-teal"
@@ -123,7 +123,7 @@ const ArtistsPage = () => {
         </div>
 
         {/*Table*/}
-        <div className="overflow-x-auto w-full">
+        <div className="overflow-x-auto">
           <table className="w-full bg-sidebar rounded-lg text-xl font-body ">
             <thead className="border-b border-white/20">
               <tr className="text-gray-200 ">
